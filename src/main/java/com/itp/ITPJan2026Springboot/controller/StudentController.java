@@ -79,7 +79,7 @@ public class StudentController {
 	}
 	
 	@PostMapping("/saveStudentByRequestBody") 
-	public Student saveStudentByPathVariable1(@RequestBody Student s1)
+	public Student saveStudentByRequestBody(@RequestBody Student s1)
 	{
 		return studentService.saveStudent(s1);
 	}
