@@ -1,10 +1,12 @@
 package com.itp.ITPJan2026Springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -82,6 +84,25 @@ public class StudentController {
 	public Student saveStudentByRequestBody(@RequestBody Student s1)
 	{
 		return studentService.saveStudent(s1);
+	}
+	
+	@PostMapping("/saveMultipleStudentByRequestBody") 
+	public List<Student> saveMultipleStudentByRequestBody(@RequestBody List<Student> students)
+	{
+		return studentService.saveMultipleStudent(students);
+	}
+	
+	
+	@GetMapping("/getAllStudents") 
+	public List<Student> getAllStudents()
+	{
+		return studentService.getAllStudents();
+	}
+	
+	@GetMapping("/getStudent/{studid}") 
+	public Student getStudent(@PathVariable int studid)
+	{
+		return studentService.getStudent(studid);
 	}
 }
 
