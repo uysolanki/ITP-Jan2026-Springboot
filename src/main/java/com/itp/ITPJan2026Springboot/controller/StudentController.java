@@ -3,6 +3,8 @@ package com.itp.ITPJan2026Springboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +42,16 @@ public class StudentController {
 		return studentService.saveStudent(s1);
 	}
 	
+	@PostMapping("/saveStudentRE1") //Http Method
+	public ResponseEntity<Student> saveStudentRE1()
+	{
+		Student s1=new Student();
+		s1.setPer(78.5);
+		s1.setSname("Alice");
+		
+		return new ResponseEntity<Student>(studentService.saveStudent(s1), HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/saveStudentByRequestParam") 
 	public Student saveStudentByRequestParam(@RequestParam("a") double percentage,@RequestParam("b") String studentName)
 	{
@@ -48,6 +60,16 @@ public class StudentController {
 		s1.setSname(studentName);
 		
 		return studentService.saveStudent(s1);
+	}
+	
+	@PostMapping("/saveStudentByRequestParamRE") 
+	public ResponseEntity<Student> saveStudentByRequestParamRE(@RequestParam("a") double percentage,@RequestParam("b") String studentName)
+	{
+		Student s1=new Student();
+		s1.setPer(percentage);
+		s1.setSname(studentName);
+		
+		return new ResponseEntity<Student>(studentService.saveStudent(s1),HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/saveStudentByRequestParam1") 
@@ -97,6 +119,12 @@ public class StudentController {
 	public List<Student> getAllStudents()
 	{
 		return studentService.getAllStudents();
+	}
+	
+	@GetMapping("/getAllStudentsRE") 
+	public ResponseEntity<List<Student>> getAllStudentsRE()
+	{
+		return new  ResponseEntity<List<Student>>(studentService.getAllStudents(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/getStudent/{studid}") 
