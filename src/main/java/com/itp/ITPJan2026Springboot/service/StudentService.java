@@ -2,6 +2,7 @@ package com.itp.ITPJan2026Springboot.service;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,13 @@ public class StudentService {
 			Student studentFromDb=getStudent(studid);
 			studentFromDb.setPer(newStudentValues.getPer());
 			studentFromDb.setSname(newStudentValues.getSname());
+			
+			studentFromDb.setCourse(newStudentValues.getCourse());
+			studentFromDb.setCity(newStudentValues.getCity());
+			
+			studentFromDb.setEmail(newStudentValues.getEmail());
+			studentFromDb.setDob(newStudentValues.getDob());
+			
 			return studentRepository.save(studentFromDb);
 		}
 		
@@ -74,6 +82,10 @@ public class StudentService {
 		
 		
 		
+	}
+
+	public @Nullable List<Student> getCityWiseStudents(String studcity) {
+		return studentRepository.findByCityContaining(studcity);
 	}
 	
 }

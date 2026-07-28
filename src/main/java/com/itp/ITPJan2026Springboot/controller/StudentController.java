@@ -178,6 +178,11 @@ public class StudentController {
 	}
 	
 	
+	@GetMapping("/getCityWiseStudents/{studcity}") 
+	public ResponseEntity<List<Student>> getCityWiseStudents(@PathVariable String studcity)
+	{
+		return new  ResponseEntity<List<Student>>(studentService.getCityWiseStudents(studcity),HttpStatus.OK);
+	}
 }
 
 /*
