@@ -44,5 +44,36 @@ public class StudentService {
 			throw new RuntimeException("Record of Student having RollNumber " + studid + " does not exist");
 		}
 	}
+
+	public void updateStudent(int studid, Student newStudentValues) {
+		if(studentRepository.existsById(studid))
+		{
+		//logic for update
+			Student studentFromDb=getStudent(studid);
+			studentFromDb.setPer(newStudentValues.getPer());
+			studentFromDb.setSname(newStudentValues.getSname());
+			studentRepository.save(studentFromDb);
+		}
+		else
+		{
+			throw new RuntimeException("Record of Student having RollNumber " + studid + " does not exist");
+		}
+		
+	}
+
+	public Student updateStudent1(int studid, Student newStudentValues) {
+		if(studentRepository.existsById(studid))
+		{
+			Student studentFromDb=getStudent(studid);
+			studentFromDb.setPer(newStudentValues.getPer());
+			studentFromDb.setSname(newStudentValues.getSname());
+			return studentRepository.save(studentFromDb);
+		}
+		
+		throw new RuntimeException("Record of Student having RollNumber " + studid + " does not exist");
+		
+		
+		
+	}
 	
 }

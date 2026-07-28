@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -141,6 +142,34 @@ public class StudentController {
 		{
 		studentService.deleteStudent(studid);
 		return new ResponseEntity<String>("Record of Student having RollNumber " + studid + " has been deleted",HttpStatus.OK);
+		}
+		catch(RuntimeException ex1)
+		{
+		return new ResponseEntity<String>(ex1.getMessage(),HttpStatus.OK);		
+		}
+	}
+	
+	@PutMapping("/updateStudent/{studid}") 
+	public ResponseEntity<String> updateStudent(@PathVariable int studid, @RequestBody Student newStudentValues)
+	{
+		try
+		{
+		studentService.updateStudent(studid,newStudentValues);
+		return new ResponseEntity<String>("Record of Student having RollNumber " + studid + " has been updated",HttpStatus.OK);
+		}
+		catch(RuntimeException ex1)
+		{
+		return new ResponseEntity<String>(ex1.getMessage(),HttpStatus.OK);		
+		}
+	}
+	
+	
+	@PutMapping("/updateStudent1/{studid}") 
+	public ResponseEntity<?> updateStudent1(@PathVariable int studid, @RequestBody Student newStudentValues)
+	{
+		try
+		{
+		return new ResponseEntity<Student>(studentService.updateStudent1(studid,newStudentValues),HttpStatus.OK);
 		}
 		catch(RuntimeException ex1)
 		{
