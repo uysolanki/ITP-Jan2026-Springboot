@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itp.ITPJan2026Springboot.dto.StudentDTO;
 import com.itp.ITPJan2026Springboot.entity.Student;
 import com.itp.ITPJan2026Springboot.service.StudentService;
 
@@ -182,6 +183,12 @@ public class StudentController {
 	public ResponseEntity<List<Student>> getCityWiseStudents(@PathVariable String studcity)
 	{
 		return new  ResponseEntity<List<Student>>(studentService.getCityWiseStudents(studcity),HttpStatus.OK);
+	}
+	
+	@PostMapping("/saveStudentByRequestBodyUsingDTO") 
+	public ResponseEntity<StudentDTO> saveStudentByRequestBodyUsingDTO(@RequestBody StudentDTO studDTO)
+	{
+		return new ResponseEntity<StudentDTO>(studentService.saveStudentUsingDTO(studDTO),HttpStatus.OK);
 	}
 }
 
