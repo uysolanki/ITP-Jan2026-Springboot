@@ -1,6 +1,7 @@
 package com.itp.ITPJan2026Springboot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.jspecify.annotations.Nullable;
 import org.modelmapper.ModelMapper;
@@ -37,6 +38,35 @@ public class ProductService {
 		return productsSavedInDB.stream()
 		.map(product->modelMapper.map(product, ProductDTO.class))
 		.toList();
+	}
+	
+	public @Nullable List<ProductDTO> getAllProducts() {
+		// TODO Auto-generated method stub
+		
+		List<Product> productsInDB = productRepository.findAll();
+		List<ProductDTO> products =productsInDB.stream()
+				.map(product->modelMapper.map(product, ProductDTO.class))
+				.toList();
+	
+		
+		return products;
+	}
+
+	public @Nullable List<ProductDTO> getProductsByCategory(String category) {
+		// TODO Auto-generated method stub
+		List<Product> productsInDB = productRepository.findByCategoryContaining(category);
+		List<ProductDTO> products =productsInDB.stream()
+				.map(product->modelMapper.map(product, ProductDTO.class))
+				.toList();
+		return products;
+	}
+
+	public @Nullable ProductDTO getProductsById(int id) {
+		// TODO Auto-generated method stub
+		
+		Optional<Product> productInDB =productRepository.findById(id);
+		ProductDTO product =modelMapper.map(productInDB, ProductDTO.class);
+		return product;
 	}
 
 }
