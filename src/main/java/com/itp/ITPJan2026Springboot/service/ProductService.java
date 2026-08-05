@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.itp.ITPJan2026Springboot.dto.ProductDTO;
 import com.itp.ITPJan2026Springboot.entity.Product;
+import com.itp.ITPJan2026Springboot.exception.ProductNotFoundException;
 import com.itp.ITPJan2026Springboot.repository.ProductRepository;
 
 import jakarta.validation.Valid;
@@ -70,6 +71,16 @@ public class ProductService {
 		Optional<Product> productInDB =productRepository.findById(id);
 		ProductDTO product =modelMapper.map(productInDB, ProductDTO.class);
 		return product;
+	}
+
+	public void deleteProductsById(int id) throws ProductNotFoundException
+	{
+		if(!productRepository.existsById(id))
+		{
+			throw new ProductNotFoundException("Product with ID "+id+ " does NOT exist.");
+		}
+		
+		productRepository.deleteById(id);
 	}
 
 //	public ProductDTO saveProductWithValidationAndExceptionHandling(@Valid ProductDTO productDto) throws MethodArgumentNotValidException

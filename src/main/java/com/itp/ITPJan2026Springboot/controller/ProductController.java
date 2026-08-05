@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itp.ITPJan2026Springboot.dto.ProductDTO;
 import com.itp.ITPJan2026Springboot.exception.APIError;
+import com.itp.ITPJan2026Springboot.exception.ProductNotFoundException;
 import com.itp.ITPJan2026Springboot.service.ProductService;
 
 import jakarta.validation.Valid;
@@ -58,6 +60,13 @@ public class ProductController {
 	return new ResponseEntity<>(productService.saveProduct(productDto),HttpStatus.CREATED);
 	}
 	
+	
+	@PostMapping("/saveProductWithValidationAndExceptionHandlingUsingGHA")
+	ResponseEntity<ProductDTO> saveProductWithValidationAndExceptionHandlingUsingGHA(@Valid @RequestBody ProductDTO productDto)
+	{
+	return new ResponseEntity<ProductDTO>(productService.saveProduct(productDto),HttpStatus.CREATED);
+	}
+	
 	@PostMapping("/saveProducts")
 	ResponseEntity<List<ProductDTO>> saveProducts(@RequestBody List<ProductDTO> productDtos)
 	{
@@ -79,5 +88,25 @@ public class ProductController {
 	@GetMapping("/getProductsById/{id}")
 	ResponseEntity<ProductDTO> getProductsById(@PathVariable int id){
 		return  new ResponseEntity<ProductDTO>(productService.getProductsById(id),HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteProductsById/{id}")
+	ResponseEntity<String> deleteProductsById(@PathVariable int id){
+		try
+		{
+		productService.deleteProductsById(id);
+		}
+		catch(ProductNotFoundException ex)
+		{
+		return  new ResponseEntity<String>(ex.getMessage(),HttpStatus.OK);
+		}
+		return  new ResponseEntity<String>("Product Deleted with ID " +id,HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteProductsByIdUsingGHA/{id}")
+	ResponseEntity<String> deleteProductsByIdUsingGHA(@PathVariable int id){
+		
+		productService.deleteProductsById(id);
+		return  new ResponseEntity<String>("Product Deleted with ID " +id,HttpStatus.OK);
 	}
 }
