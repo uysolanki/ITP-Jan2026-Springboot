@@ -19,17 +19,17 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 	
-//	@ExceptionHandler(MethodArgumentNotValidException.class)
-//	public ResponseEntity<List<APIError>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) 
-//	{
-//		List<APIError> errors = new ArrayList<>();
-//		for (FieldError error : ex.getBindingResult().getFieldErrors()) 
-//		{
-//		APIError apiError = new APIError(error.getField(), error.getRejectedValue(),error.getDefaultMessage());
-//		errors.add(apiError);
-//		}
-//		return new ResponseEntity<List<APIError>>(errors, HttpStatus.BAD_REQUEST);
-//	}
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<List<APIError>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) 
+	{
+		List<APIError> errors = new ArrayList<>();
+		for (FieldError error : ex.getBindingResult().getFieldErrors()) 
+		{
+		APIError apiError = new APIError(error.getField(), error.getRejectedValue(),error.getDefaultMessage());
+		errors.add(apiError);
+		}
+		return new ResponseEntity<List<APIError>>(errors, HttpStatus.BAD_REQUEST);
+	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<List<APIError>> handleMethodArgumentNotValidException1(MethodArgumentNotValidException ex) 
