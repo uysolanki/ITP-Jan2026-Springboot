@@ -31,21 +31,21 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<List<APIError>>(errors, HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<List<APIError>> handleMethodArgumentNotValidException1(MethodArgumentNotValidException ex) 
-	{
-		List<APIError> errors = new ArrayList<>();
-
-	    ex.getBindingResult().getFieldErrors().forEach(error -> {
-	        APIError apiError = new APIError(
-	        		 error.getField(),
-	        		 error.getRejectedValue(),
-	                error.getDefaultMessage()     
-	        );
-	        errors.add(apiError);
-	    });
-
-	    return new ResponseEntity<List<APIError>>(errors, HttpStatus.BAD_REQUEST);
-
-	}
+//	@ExceptionHandler(MethodArgumentNotValidException.class)
+//	public ResponseEntity<List<APIError>> handleMethodArgumentNotValidException1(MethodArgumentNotValidException ex) 
+//	{
+//		List<APIError> errors = new ArrayList<>();
+//
+//	    ex.getBindingResult().getFieldErrors().forEach(error -> {
+//	        APIError apiError = new APIError(
+//	        		 error.getField(),
+//	        		 error.getRejectedValue(),
+//	                error.getDefaultMessage()     
+//	        );
+//	        errors.add(apiError);
+//	    });
+//
+//	    return new ResponseEntity<List<APIError>>(errors, HttpStatus.BAD_REQUEST);
+//
+//	}
 }

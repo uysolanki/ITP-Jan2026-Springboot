@@ -83,6 +83,24 @@ public class ProductService {
 		productRepository.deleteById(id);
 	}
 
+	public @Nullable ProductDTO updateProduct(int id, ProductDTO productDTO) throws Exception {
+		// TODO Auto-generated method stub
+		Product productInDB = productRepository.findById(id)
+		        .orElseThrow(() -> new Exception("Product not found"));
+
+		productInDB.setTitle(productDTO.getTitle());
+		productInDB.setCategory(productDTO.getCategory());
+		productInDB.setDescription(productDTO.getDescription());
+		productInDB.setImage(productDTO.getImage());
+		productInDB.setPrice(productDTO.getPrice());
+		//productInDB.setRating(productDTO.getRating());
+
+		Product savedProduct = productRepository.save(productInDB);
+
+		return modelMapper.map(savedProduct, ProductDTO.class);
+		
+	}
+
 //	public ProductDTO saveProductWithValidationAndExceptionHandling(@Valid ProductDTO productDto) throws MethodArgumentNotValidException
 //	{
 //		Product product=modelMapper.map(productDto, Product.class);
