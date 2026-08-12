@@ -45,7 +45,7 @@ public class Product {
 	    private String image;
 	    
 	    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	    @JoinColumn(name ="ratingid", referencedColumnName = "ratingid",nullable = false )
+	    @JoinColumn(name ="ratingid", referencedColumnName = "ratingid",nullable = true )
 	    private Rating rating;
 
 	    @Column(nullable = false, updatable = false)  //include only insert and not in update query
