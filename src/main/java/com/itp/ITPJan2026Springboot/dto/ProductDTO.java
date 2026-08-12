@@ -40,7 +40,7 @@ public class ProductDTO {
 	    )
 	    private String image;
 	   
-	    @NotNull(message = "Product Rating is mandatory")
+	   // @NotNull(message = "Product Rating is mandatory")
 	    @Valid
 	    private RatingDTO rating;
 

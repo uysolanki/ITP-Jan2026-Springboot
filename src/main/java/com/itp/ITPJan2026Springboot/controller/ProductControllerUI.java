@@ -40,7 +40,7 @@ public class ProductControllerUI {
 	}
 	
 	@PostMapping("/addSingleProduct")
-	public String addSingleProduct(@ModelAttribute ProductDTO productDto)
+	public String addSingleProduct(@Valid @ModelAttribute ProductDTO productDto)
 	{
 		productService.saveProduct(productDto);
 //		return "confirm";
