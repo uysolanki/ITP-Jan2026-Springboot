@@ -43,6 +43,7 @@ public class ProductControllerUI {
 	public String addSingleProduct(@ModelAttribute ProductDTO productDto)
 	{
 		productService.saveProduct(productDto);
-		return "confirm";
+//		return "confirm";
+		return "redirect:/productui/showProducts";
 	}
 }
