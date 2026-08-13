@@ -7,9 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -43,7 +46,32 @@ public class ProductControllerUI {
 	public String addSingleProduct(@Valid @ModelAttribute ProductDTO productDto)
 	{
 		productService.saveProduct(productDto);
-//		return "confirm";
 		return "redirect:/productui/showProducts";
+	}
+	
+	@RequestMapping("/deleteProductUI/{id}")
+	public String deleteProductUI(@PathVariable int id){
+		
+		productService.deleteProductsById(id);
+		return "redirect:/productui/showProducts";
+	}
+	
+	@RequestMapping("/updateProductForm/{id}")
+	public String updateProductForm(@PathVariable int id,Model model){
+		
+		ProductDTO product=productService.getProductsById(id);
+		model.addAttribute("product",product);
+		return "update-product-form";
+	}
+	
+	@PostMapping("/updateProductUI/{prodId}")
+	public String updateProduct(@PathVariable int prodId, @ModelAttribute ProductDTO productDTO){
+		try {
+			productService.updateProduct(prodId, productDTO);
+			return "redirect:/productui/showProducts";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+		
 	}
 }

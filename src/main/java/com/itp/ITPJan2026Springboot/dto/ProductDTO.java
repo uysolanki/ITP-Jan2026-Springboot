@@ -21,6 +21,8 @@ import lombok.ToString;
 @Builder
 public class ProductDTO {
 
+		private int id;
+	
 	    @Size(min = 6, max = 100, message = "Product Title must be between 6 and 100 characters") 
 	    private String title;
 	    
