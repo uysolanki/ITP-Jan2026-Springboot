@@ -1,20 +1,17 @@
 package com.itp.ITPJan2026Springboot.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itp.ITPJan2026Springboot.dto.ProductDTO;
 import com.itp.ITPJan2026Springboot.service.ProductService;
@@ -28,7 +25,7 @@ public class ProductControllerUI {
 	@Autowired
 	ProductService productService;
 	
-	@GetMapping("/showProducts")
+	@RequestMapping("/showProducts")
 	public String showProducts(Model model){
 		List<ProductDTO> products = productService.getAllProducts();
 		model.addAttribute("products",products);
@@ -74,4 +71,23 @@ public class ProductControllerUI {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/403")
+	public ModelAndView accesssDenied(Principal user) {
+
+		ModelAndView model = new ModelAndView();
+
+		if (user != null) {
+			model.addObject("msg", "Hi " + user.getName() 
+			+ ", you do not have permission to access this page!");
+		} else {
+			model.addObject("msg", 
+			    "you do not have permission to access this page!");
+		}
+
+		model.setViewName("403");
+		return model;
+
+	}
+
 }
