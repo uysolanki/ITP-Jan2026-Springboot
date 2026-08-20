@@ -64,8 +64,13 @@ public class MyWebSecurity2 {
 
    
     @Bean
+ 	public UserDetailsService mySetUserDetailsService() {
+		return new MyUserDetailsService();
+	}
+
+    @Bean
 	public AuthenticationProvider myAuthenticationProvider() {
-		DaoAuthenticationProvider dao =new DaoAuthenticationProvider(new MyUserDetailsService());
+		DaoAuthenticationProvider dao =new DaoAuthenticationProvider(mySetUserDetailsService());
 		dao.setPasswordEncoder(myPasswordEncoder());
 		return dao;
 	}

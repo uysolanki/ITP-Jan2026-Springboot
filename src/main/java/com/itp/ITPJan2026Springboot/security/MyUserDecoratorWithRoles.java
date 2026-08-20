@@ -34,7 +34,7 @@ public class MyUserDecoratorWithRoles implements UserDetails {
 
 
 	@Override
-	public @Nullable String getPassword() {
+	public String getPassword() {
 		return user.getPassword();
 	}
 
