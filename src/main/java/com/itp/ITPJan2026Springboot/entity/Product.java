@@ -27,7 +27,7 @@ public class Product {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int id;
+	    private Integer id;
 		
 		@Column(nullable = false, length = 100)  //title varchar(100) not null
 	    private String title;

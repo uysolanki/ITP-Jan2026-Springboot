@@ -7,14 +7,12 @@ import org.jspecify.annotations.Nullable;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import com.itp.ITPJan2026Springboot.dto.ProductDTO;
 import com.itp.ITPJan2026Springboot.entity.Product;
+import com.itp.ITPJan2026Springboot.entity.Rating;
 import com.itp.ITPJan2026Springboot.exception.ProductNotFoundException;
 import com.itp.ITPJan2026Springboot.repository.ProductRepository;
-
-import jakarta.validation.Valid;
 
 @Service  //Component
 public class ProductService {
@@ -101,6 +99,29 @@ public class ProductService {
 		
 	}
 
+public void rateProduct(int productId, int rating) {
+		
+		Product product =productRepository.findById(productId).get();
+		Rating rating2 = null;
+		if(product.getRating()==null)
+		{
+			 rating2 = Rating.builder()
+					.count(1)
+					.rate(rating)
+					.build();
+		}else {
+			rating2= product.getRating();
+			rating+=product.getRating().getRate();
+			rating = (rating/(rating2.getCount()+1));
+			rating2 = Rating.builder()
+					.count(rating2.getCount()+1)
+					.rate(rating)
+					.build();
+		}
+		product.setRating(rating2);
+		productRepository.save(product);
+		
+	}
 //	public ProductDTO saveProductWithValidationAndExceptionHandling(@Valid ProductDTO productDto) throws MethodArgumentNotValidException
 //	{
 //		Product product=modelMapper.map(productDto, Product.class);

@@ -20,7 +20,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/productui")
-public class ProductControllerUI {
+public class ProductControllerThymeleafUI {
 	
 	@Autowired
 	ProductService productService;
