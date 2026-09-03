@@ -17,7 +17,7 @@
 //	
 //	@EnableWebSecurity
 //	@Configuration
-//	public class MyWebSecurity3 {
+//	public class MyWebSecurityForReact {
 //	
 //	    @Bean
 //	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

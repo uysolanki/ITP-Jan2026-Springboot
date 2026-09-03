@@ -14,7 +14,7 @@
 //
 //@EnableWebSecurity
 //@Configuration
-//public class MyWebSecurity {
+//public class MyWebSecurityForInMemoryAuthentication {
 //	
 //	@Bean
 //    public UserDetailsService userDetailsService() {

@@ -17,7 +17,7 @@
 //
 //@EnableWebSecurity
 //@Configuration
-//public class MyWebSecurity2 {
+//public class MyWebSecurityForDaoAuthentication {
 //	
 //
 //    @Bean

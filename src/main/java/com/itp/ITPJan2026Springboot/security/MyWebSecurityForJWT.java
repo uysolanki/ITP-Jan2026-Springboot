@@ -19,10 +19,13 @@ import com.itp.ITPJan2026Springboot.filter.JwtRequestFilter;
 
 @EnableWebSecurity
 @Configuration
-public class MyWebSecurity4 {
+public class MyWebSecurityForJWT {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
+	
+	@Autowired
+	private MyUserDetailsService myUserDetailsService;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -54,8 +57,7 @@ public class MyWebSecurity4 {
 		return http.build();
 	}
 
-	@Autowired
-	private MyUserDetailsService myUserDetailsService;
+	
 
 	@Bean
 	public AuthenticationProvider myAuthenticationProvider() {
