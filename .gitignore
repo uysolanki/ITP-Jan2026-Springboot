@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Ignore local environment properties with secrets
+**/application-local.properties
+application-local.properties
+**/application-*.properties
+
+application-local.properties
 ### STS ###
 .apt_generated
 .classpath
